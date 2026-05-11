@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative h-screen w-full overflow-hidden bg-dark-warm"
+      className="relative h-[100dvh] w-full overflow-hidden bg-dark-warm"
     >
       {/* Background */}
       <motion.div
@@ -27,7 +27,7 @@ export default function Hero() {
         <div className="w-full h-full bg-gradient-to-br from-[#3D1F0E] via-[#2C1A0E] to-[#1A1008]" />
       </motion.div>
 
-      <motion.div style={{ y: contentY }} className="relative z-20 h-full">
+      <motion.div style={{ y: contentY }} className="relative z-20 h-[100dvh]">
 
         {/* Top-left label */}
         <motion.p
@@ -46,7 +46,7 @@ export default function Hero() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute bottom-6 md:bottom-8 right-4 md:right-10 text-salmon text-xs md:text-sm font-medium"
+          className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:bottom-8 right-4 md:right-10 text-salmon text-xs md:text-sm font-medium"
         >
           Freelance Design Director
         </motion.p>
