@@ -11,7 +11,7 @@ function BlinkingCursor() {
   }, []);
   return (
     <span
-      className="inline-block w-[0.18em] h-[0.85em] bg-salmon align-middle ml-1 translate-y-[-0.05em]"
+      className="inline-block w-[0.12em] h-[0.8em] bg-salmon align-middle ml-1 translate-y-[-0.05em]"
       style={{ opacity: visible ? 1 : 0 }}
     />
   );
@@ -19,7 +19,7 @@ function BlinkingCursor() {
 
 export default function StatsSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   const containerVariants: Variants = {
     hidden: {},
@@ -34,9 +34,9 @@ export default function StatsSection() {
   };
 
   return (
-    <section className="min-h-screen bg-cream flex items-center relative overflow-hidden px-6 md:px-10 py-24">
-      {/* Decorative vertical bars right side */}
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 flex gap-2 items-end h-48">
+    <section className="min-h-screen bg-cream flex items-center relative overflow-hidden px-4 md:px-10 py-20">
+      {/* Decorative vertical bars — only on md+ to avoid mobile overflow */}
+      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 hidden md:flex gap-2 items-end h-40 md:h-48">
         <motion.div
           initial={{ scaleY: 0 }}
           animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
@@ -56,7 +56,7 @@ export default function StatsSection() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-5xl"
+        className="max-w-5xl w-full"
       >
         <motion.p
           variants={wordVariants}
@@ -72,34 +72,27 @@ export default function StatsSection() {
           making users
         </motion.p>
 
+        {/* click + and + scroll row */}
         <motion.div
           variants={wordVariants}
-          className="flex flex-wrap items-baseline gap-x-4 leading-none"
+          className="flex flex-wrap items-baseline gap-x-3 md:gap-x-4 leading-none"
         >
-          {/* "click" with pill highlight */}
-          <motion.span
-            initial={{ "--pill-scale": "0" } as Record<string, string>}
-            animate={isInView ? { "--pill-scale": "1" } as Record<string, string> : {}}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="relative inline-block"
-          >
+          <span className="relative inline-block">
             <motion.span
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
               transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 bg-salmon rounded-full origin-left"
             />
-            <span className="relative text-display-lg font-bold text-cream px-4 leading-none">
+            <span className="relative text-display-lg font-bold text-cream px-3 md:px-4 leading-none">
               click
             </span>
-          </motion.span>
+          </span>
 
           <span className="text-display-lg font-bold text-muted leading-none">and</span>
 
-          {/* "scroll" with cursor blink */}
           <span className="text-display-lg font-bold text-salmon leading-none inline-flex items-baseline">
-            scro
-            <span>ll</span>
+            scro<span>ll</span>
             {isInView && <BlinkingCursor />}
           </span>
         </motion.div>

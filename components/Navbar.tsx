@@ -16,7 +16,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-10"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-10 md:py-4"
     >
       {/* Logo */}
       <Link
@@ -41,16 +41,15 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
         <Link
           href="/about"
           className={clsx(
-            "px-3 py-1 rounded-full transition-colors hover:opacity-70",
+            "px-2 md:px-3 py-1 rounded-full transition-colors hover:opacity-70 text-xs md:text-sm",
             isDark ? "text-cream/80" : "text-muted"
           )}
         >
           About
         </Link>
 
-        {/* Logo icon pill */}
-        <div className="bg-blue-600 rounded-full w-8 h-8 flex items-center justify-center">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <div className="bg-blue-600 rounded-full w-7 h-7 md:w-8 md:h-8 flex items-center justify-center flex-shrink-0">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path d="M4 6h4v12H4zM10 6h4v12h-4zM16 6h4v6h-4z" fill="white" />
           </svg>
         </div>
@@ -58,7 +57,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
         <Link
           href="/#work"
           className={clsx(
-            "px-3 py-1 rounded-full transition-colors hover:opacity-70",
+            "px-2 md:px-3 py-1 rounded-full transition-colors hover:opacity-70 text-xs md:text-sm",
             isDark ? "text-cream/80" : "text-muted"
           )}
         >
@@ -66,7 +65,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
         </Link>
       </div>
 
-      {/* Social links */}
+      {/* Social links — hidden on small screens */}
       <div className={clsx(
         "hidden md:flex items-center gap-4 text-sm",
         isDark ? "text-cream/70" : "text-muted"
@@ -77,6 +76,17 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
           </a>
         ))}
       </div>
+
+      {/* Mobile: just Email link */}
+      <a
+        href="#"
+        className={clsx(
+          "md:hidden text-xs opacity-70",
+          isDark ? "text-cream" : "text-muted"
+        )}
+      >
+        Email
+      </a>
     </motion.nav>
   );
 }

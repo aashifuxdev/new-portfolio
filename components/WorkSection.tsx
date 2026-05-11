@@ -2,29 +2,76 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import ProjectCard from "./ProjectCard";
+import clsx from "clsx";
 
-const categories = [
+interface CardProps {
+  title: string;
+  tag: string;
+  bg: string;
+  textColor?: string;
+  double?: boolean;
+  index: number;
+}
+
+function ProjectCard({ title, tag, bg, textColor = "text-white", double = false, index }: CardProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, delay: index * 0.09 }}
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      className={clsx(
+        "rounded-2xl overflow-hidden cursor-pointer group relative",
+        double ? "col-span-2" : "col-span-1",
+        "min-h-[200px] md:min-h-[240px]"
+      )}
+    >
+      <div className={clsx("w-full h-full flex flex-col justify-end p-5 md:p-7", bg, double ? "min-h-[220px] md:min-h-[260px]" : "min-h-[200px] md:min-h-[240px]")}>
+        <span className={clsx("text-xs font-medium mb-2 opacity-60", textColor)}>{tag}</span>
+        <h3 className={clsx("font-bold leading-tight", textColor, double ? "text-2xl md:text-3xl" : "text-lg md:text-xl")}>
+          {title}
+        </h3>
+        <span className={clsx(
+          "absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-lg",
+          textColor
+        )}>↗</span>
+      </div>
+    </motion.div>
+  );
+}
+
+const cards = [
   {
-    label: "Websites &\nLanding pages",
-    description: "Creating high-end and beautiful websites built to perform and convert.",
-    projects: [
-      { title: "Google Maps Campaign", category: "Web Design", bg: "bg-gradient-to-br from-yellow-400 to-yellow-500" },
-      { title: "Matrix Grid", category: "Landing Page", bg: "bg-gradient-to-br from-gray-800 to-gray-900" },
-      { title: "Morable Studio", category: "Web Design", bg: "bg-gradient-to-br from-[#E8855A] to-[#C4593A]" },
-      { title: "Clean UI Kit", category: "UI Design", bg: "bg-gradient-to-br from-slate-100 to-slate-200" },
-      { title: "CLAIM", category: "Landing Page", bg: "bg-gradient-to-br from-[#1a0533] to-[#0a0015]" },
-    ],
+    title: "Google Maps Local Guide",
+    tag: "Web Design",
+    bg: "bg-gradient-to-br from-yellow-400 to-yellow-500",
+    textColor: "text-yellow-900",
   },
   {
-    label: "Brand Identity\n& Visual Design",
-    description: "Crafting memorable brands that communicate clearly and stand out.",
-    projects: [
-      { title: "TopTrader", category: "Branding", bg: "bg-gradient-to-br from-[#0D0D0D] to-[#1a1a1a]" },
-      { title: "Morable Mark", category: "Logo Design", bg: "bg-gradient-to-br from-blue-600 to-blue-800" },
-      { title: "Startup X", category: "Brand System", bg: "bg-gradient-to-br from-violet-600 to-purple-800" },
-      { title: "App Icons", category: "Visual Design", bg: "bg-gradient-to-br from-orange-400 to-rose-500" },
-    ],
+    title: "TopTrader Platform",
+    tag: "Branding",
+    bg: "bg-[#0D0D0D]",
+    textColor: "text-[#00FF9F]",
+  },
+  {
+    title: "Morable Design Studio",
+    tag: "Web Design · Brand Identity",
+    bg: "bg-gradient-to-br from-[#E8855A] to-[#C4593A]",
+    textColor: "text-white",
+    double: true,
+  },
+  {
+    title: "Clean UI Kit",
+    tag: "UI Design",
+    bg: "bg-gradient-to-br from-slate-200 to-slate-300",
+    textColor: "text-slate-700",
+  },
+  {
+    title: "CLAIM",
+    tag: "Landing Page",
+    bg: "bg-gradient-to-br from-[#1a0533] to-[#0a0015]",
+    textColor: "text-white",
   },
 ];
 
@@ -33,13 +80,13 @@ export default function WorkSection() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="work" className="bg-cream py-24 overflow-hidden">
-      <div ref={ref} className="px-6 md:px-10 mb-16">
+    <section id="work" className="bg-cream py-16 md:py-24 px-4 md:px-10">
+      <div ref={ref} className="mb-10 md:mb-14">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-sm font-medium text-muted mb-4"
+          className="text-xs md:text-sm font-medium text-muted mb-3 md:mb-4"
         >
           Design Expert
         </motion.p>
@@ -47,7 +94,7 @@ export default function WorkSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-display-lg font-bold text-muted max-w-4xl leading-none"
+          className="text-display-lg font-bold text-muted leading-none"
         >
           I help companies to
           <br />
@@ -55,49 +102,19 @@ export default function WorkSection() {
         </motion.h2>
       </div>
 
-      {categories.map((cat, catIndex) => (
-        <div key={catIndex} className="mb-16">
-          <div className="px-6 md:px-10 mb-8">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: catIndex * 0.1 }}
-              className="text-display-md font-bold text-muted text-center whitespace-pre-line leading-tight"
-            >
-              {cat.label}
-            </motion.h3>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 + catIndex * 0.1 }}
-              className="text-sm text-muted/70 text-center mt-2 max-w-xs mx-auto"
-            >
-              {cat.description}
-            </motion.p>
-          </div>
-
-          {/* Horizontal scroll strip */}
-          <motion.div
-            className="flex gap-4 px-6 md:px-10 overflow-x-auto pb-4 cursor-grab active:cursor-grabbing"
-            drag="x"
-            dragConstraints={{ right: 0, left: -(cat.projects.length * 280 - 800) }}
-            dragTransition={{ bounceStiffness: 200, bounceDamping: 30 }}
-            style={{ scrollbarWidth: "none" }}
-          >
-            {cat.projects.map((project, i) => (
-              <ProjectCard
-                key={i}
-                title={project.title}
-                category={project.category}
-                bg={project.bg}
-                index={i}
-              />
-            ))}
-          </motion.div>
-        </div>
-      ))}
+      <div className="grid grid-cols-2 gap-3 md:gap-4 max-w-5xl">
+        {cards.map((card, i) => (
+          <ProjectCard
+            key={i}
+            index={i}
+            title={card.title}
+            tag={card.tag}
+            bg={card.bg}
+            textColor={card.textColor}
+            double={card.double}
+          />
+        ))}
+      </div>
     </section>
   );
 }
