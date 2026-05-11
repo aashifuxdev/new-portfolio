@@ -11,25 +11,18 @@ export default function Hero() {
   });
 
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
 
   return (
     <section
       ref={ref}
       className="relative h-[100dvh] w-full overflow-hidden bg-dark-warm"
     >
-      {/* Background */}
-      <motion.div
-        style={{ y: bgY }}
-        className="absolute inset-0 w-full h-[110%]"
-      >
+      <motion.div style={{ y: bgY }} className="absolute inset-0 w-full h-[110%]">
         <div className="absolute inset-0 bg-gradient-to-b from-brown-warm/60 via-brown-warm/40 to-dark-warm/80 z-10" />
         <div className="w-full h-full bg-gradient-to-br from-[#3D1F0E] via-[#2C1A0E] to-[#1A1008]" />
       </motion.div>
 
-      <motion.div style={{ y: contentY }} className="relative z-20 h-[100dvh]">
-
-        {/* Top-left label */}
+      <div className="relative z-20 h-full">
         <motion.p
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -41,19 +34,17 @@ export default function Hero() {
           Design Specialist
         </motion.p>
 
-        {/* Bottom-right label */}
         <motion.p
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] md:bottom-8 right-4 md:right-10 text-salmon text-xs md:text-sm font-medium"
+          className="absolute right-4 md:right-10 text-salmon text-xs md:text-sm font-medium"
+          style={{ bottom: "calc(clamp(5rem,12vw,14rem) + 1.5rem)" }}
         >
           Freelance Design Director
         </motion.p>
 
-        {/* Split name + floating card */}
-        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-3 md:px-6 overflow-hidden">
-
+        <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-2 md:px-4">
           <motion.span
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -63,15 +54,14 @@ export default function Hero() {
             Juan
           </motion.span>
 
-          {/* Floating center card — hidden on very small screens */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative mb-10 md:mb-12 mx-1 md:mx-4 flex-shrink-0 w-[200px] sm:w-[260px] md:w-[380px] rounded-xl overflow-hidden border border-white/10 shadow-2xl hidden sm:block"
+            className="relative mb-12 md:mb-16 mx-2 md:mx-4 flex-shrink-0 w-[220px] sm:w-[280px] md:w-[380px] rounded-xl overflow-hidden border border-white/10 shadow-2xl hidden sm:block"
           >
-            <div className="bg-[#0D0D0D] aspect-video flex flex-col items-center justify-center p-3 md:p-4 gap-2">
-              <div className="self-start text-left w-full mb-1">
+            <div className="bg-[#0D0D0D] aspect-video flex flex-col justify-between p-3 md:p-4">
+              <div>
                 <p className="text-[#00FF9F] font-mono text-[8px] md:text-[10px] opacity-70">PREPARE YOURSELF ///</p>
                 <p className="text-[#00FF9F] font-mono text-[8px] md:text-[10px] opacity-50">1 REMEMBER</p>
                 <p className="text-[#00FF9F] font-mono text-[8px] md:text-[10px] opacity-50">2 TRUST YOUR INSTINCTS</p>
@@ -102,7 +92,7 @@ export default function Hero() {
             Mora
           </motion.span>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
