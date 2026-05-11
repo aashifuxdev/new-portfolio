@@ -9,11 +9,11 @@ interface CardProps {
   tag: string;
   bg: string;
   textColor?: string;
-  double?: boolean;
+  half?: boolean;
   index: number;
 }
 
-function ProjectCard({ title, tag, bg, textColor = "text-white", double = false, index }: CardProps) {
+function ProjectCard({ title, tag, bg, textColor = "text-white", half = false, index }: CardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24 }}
@@ -23,13 +23,13 @@ function ProjectCard({ title, tag, bg, textColor = "text-white", double = false,
       whileHover={{ y: -6, transition: { duration: 0.2 } }}
       className={clsx(
         "rounded-2xl overflow-hidden cursor-pointer group relative",
-        double ? "col-span-2" : "col-span-1",
-        "min-h-[200px] md:min-h-[240px]"
+        half ? "col-span-2 md:col-span-1" : "col-span-2",
+        "min-h-[480px]"
       )}
     >
-      <div className={clsx("w-full h-full flex flex-col justify-end p-5 md:p-7", bg, double ? "min-h-[220px] md:min-h-[260px]" : "min-h-[200px] md:min-h-[240px]")}>
+      <div className={clsx("w-full h-full flex flex-col justify-end p-6 md:p-8 min-h-[480px]", bg)}>
         <span className={clsx("text-xs font-medium mb-2 opacity-60", textColor)}>{tag}</span>
-        <h3 className={clsx("font-bold leading-tight", textColor, double ? "text-2xl md:text-3xl" : "text-lg md:text-xl")}>
+        <h3 className={clsx("font-bold leading-tight text-xl md:text-2xl", textColor)}>
           {title}
         </h3>
         <span className={clsx(
@@ -47,31 +47,35 @@ const cards = [
     tag: "Web Design",
     bg: "bg-gradient-to-br from-yellow-400 to-yellow-500",
     textColor: "text-yellow-900",
+    half: false,
   },
   {
     title: "TopTrader Platform",
     tag: "Branding",
     bg: "bg-[#0D0D0D]",
     textColor: "text-[#00FF9F]",
+    half: false,
   },
   {
     title: "Morable Design Studio",
     tag: "Web Design · Brand Identity",
     bg: "bg-gradient-to-br from-[#E8855A] to-[#C4593A]",
     textColor: "text-white",
-    double: true,
+    half: true,
   },
   {
     title: "Clean UI Kit",
     tag: "UI Design",
     bg: "bg-gradient-to-br from-slate-200 to-slate-300",
     textColor: "text-slate-700",
+    half: true,
   },
   {
     title: "CLAIM",
     tag: "Landing Page",
     bg: "bg-gradient-to-br from-[#1a0533] to-[#0a0015]",
     textColor: "text-white",
+    half: false,
   },
 ];
 
@@ -111,7 +115,7 @@ export default function WorkSection() {
             tag={card.tag}
             bg={card.bg}
             textColor={card.textColor}
-            double={card.double}
+            half={card.half}
           />
         ))}
       </div>
