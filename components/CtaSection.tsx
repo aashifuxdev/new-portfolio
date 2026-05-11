@@ -23,7 +23,12 @@ export default function CtaSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="text-display-lg font-bold text-muted leading-none"
+            className="text-muted font-bold"
+            style={{
+              fontSize: "clamp(32px, 5vw, 60px)",
+              lineHeight: "90%",
+              letterSpacing: "-0.4px",
+            }}
           >
             Let&apos;s build
             <br />

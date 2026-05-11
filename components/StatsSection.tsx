@@ -3,6 +3,13 @@
 import { motion, useInView, type Variants } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
+const headingStyle = {
+  fontSize: "clamp(36px, 6.5vw, 78px)",
+  fontWeight: 600,
+  lineHeight: "105%",
+  letterSpacing: "-0.35vw",
+} as const;
+
 function BlinkingCursor() {
   const [visible, setVisible] = useState(true);
   useEffect(() => {
@@ -23,9 +30,7 @@ export default function StatsSection() {
 
   const containerVariants: Variants = {
     hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.08 },
-    },
+    visible: { transition: { staggerChildren: 0.08 } },
   };
 
   const wordVariants: Variants = {
@@ -35,7 +40,6 @@ export default function StatsSection() {
 
   return (
     <section className="min-h-screen bg-cream flex items-center relative overflow-hidden px-4 md:px-10 py-20">
-      {/* Decorative vertical bars — only on md+ to avoid mobile overflow */}
       <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 hidden md:flex gap-2 items-end h-40 md:h-48">
         <motion.div
           initial={{ scaleY: 0 }}
@@ -56,26 +60,20 @@ export default function StatsSection() {
         variants={containerVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
-        className="max-w-5xl w-full"
+        className="w-full"
       >
-        <motion.p
-          variants={wordVariants}
-          className="text-display-lg font-bold text-muted leading-none"
-        >
+        <motion.p variants={wordVariants} className="text-muted" style={headingStyle}>
           16 years
         </motion.p>
 
-        <motion.p
-          variants={wordVariants}
-          className="text-display-lg font-bold text-muted leading-none"
-        >
+        <motion.p variants={wordVariants} className="text-muted" style={headingStyle}>
           making users
         </motion.p>
 
-        {/* click + and + scroll row */}
         <motion.div
           variants={wordVariants}
-          className="flex flex-wrap items-baseline gap-x-3 md:gap-x-4 leading-none"
+          className="flex flex-wrap items-baseline leading-none"
+          style={{ gap: "0 0.3em" }}
         >
           <span className="relative inline-block">
             <motion.span
@@ -84,23 +82,20 @@ export default function StatsSection() {
               transition={{ duration: 0.5, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 bg-salmon rounded-full origin-left"
             />
-            <span className="relative text-display-lg font-bold text-cream px-3 md:px-4 leading-none">
+            <span className="relative text-cream font-semibold px-[0.25em]" style={headingStyle}>
               click
             </span>
           </span>
 
-          <span className="text-display-lg font-bold text-muted leading-none">and</span>
+          <span className="text-muted font-semibold" style={headingStyle}>and</span>
 
-          <span className="text-display-lg font-bold text-salmon leading-none inline-flex items-baseline">
+          <span className="text-salmon font-semibold inline-flex items-baseline" style={headingStyle}>
             scro<span>ll</span>
             {isInView && <BlinkingCursor />}
           </span>
         </motion.div>
 
-        <motion.p
-          variants={wordVariants}
-          className="text-display-lg font-bold text-muted leading-none"
-        >
+        <motion.p variants={wordVariants} className="text-muted" style={headingStyle}>
           my designs
         </motion.p>
       </motion.div>
