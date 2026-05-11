@@ -4,7 +4,7 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const headingStyle = {
-  fontSize: "clamp(36px, 6.5vw, 78px)",
+  fontSize: "clamp(42px, 6.5vw, 78px)",
   fontWeight: 600,
   lineHeight: "105%",
   letterSpacing: "-0.35vw",

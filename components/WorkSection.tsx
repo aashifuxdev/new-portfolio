@@ -24,10 +24,10 @@ function ProjectCard({ title, tag, bg, textColor = "text-white", half = false, i
       className={clsx(
         "rounded-2xl overflow-hidden cursor-pointer group relative",
         half ? "col-span-2 md:col-span-1" : "col-span-2",
-        "min-h-[480px]"
       )}
+      style={{ height: "480px" }}
     >
-      <div className={clsx("w-full h-full flex flex-col justify-end p-6 md:p-8 min-h-[480px]", bg)}>
+      <div className={clsx("w-full h-full flex flex-col justify-end p-6 md:p-8", bg)}>
         <span className={clsx("text-xs font-medium mb-2 opacity-60", textColor)}>{tag}</span>
         <h3 className={clsx("font-bold leading-tight text-xl md:text-2xl", textColor)}>
           {title}
