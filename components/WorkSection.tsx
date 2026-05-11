@@ -106,7 +106,7 @@ export default function WorkSection() {
         </motion.h2>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:gap-4 max-w-5xl">
+      <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
         {cards.map((card, i) => (
           <ProjectCard
             key={i}
