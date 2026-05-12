@@ -12,7 +12,7 @@ const techStack = [
 
 export default function AboutHero() {
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-dark-warm flex flex-col">
+    <section className="relative h-[100dvh] w-full overflow-hidden bg-dark-warm flex flex-col">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-brown-warm via-dark-warm to-[#0A0705]" />
 
@@ -56,7 +56,7 @@ export default function AboutHero() {
       </div>
 
       {/* Split name */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-4 md:px-6 overflow-hidden z-20">
+      <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-4 md:px-6 z-20">
         <div className="flex flex-col">
           <motion.span
             initial={{ opacity: 0, y: 60 }}
