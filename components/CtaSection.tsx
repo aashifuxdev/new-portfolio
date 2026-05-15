@@ -56,7 +56,7 @@ export default function CtaSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Hover fill background */}
+            {/* Hover fill background — slides in from left */}
             <motion.div
               className="hover-main-cta absolute inset-0 bg-salmon"
               initial={{ scaleX: 0 }}
@@ -74,11 +74,11 @@ export default function CtaSection() {
               →
             </motion.div>
 
-            {/* "Let's talk" / email text */}
-            <div className="relative z-10 flex flex-col items-end overflow-hidden">
+            {/* "Let's talk" / email text — right-aligned with slide transition */}
+            <div className="relative z-10 overflow-hidden" style={{ height: "clamp(28px, 4vw, 56px)" }}>
               {/* "Let's talk" — slides up on hover */}
               <motion.h2
-                className="font-bold leading-none"
+                className="font-bold leading-none absolute right-0"
                 animate={{
                   y: hovered ? "-110%" : "0%",
                   color: hovered ? "#F5EDE3" : "#8C8072",
@@ -91,13 +91,13 @@ export default function CtaSection() {
 
               {/* Email — slides in from below on hover */}
               <motion.h2
-                className="email-cta font-bold leading-none absolute"
+                className="email-cta font-bold leading-none absolute right-0"
                 animate={{
                   y: hovered ? "0%" : "110%",
                   color: "#F5EDE3",
                 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                style={{ fontSize: "clamp(14px, 2vw, 28px)" }}
+                style={{ fontSize: "clamp(14px, 2vw, 28px)", top: "50%", transform: "translateY(-50%)" }}
               >
                 HelloJuanMora@gmail.com
               </motion.h2>

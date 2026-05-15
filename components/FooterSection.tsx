@@ -16,21 +16,21 @@ export default function FooterSection() {
       className="section footer relative min-h-[100dvh] flex flex-col"
       style={{ backgroundColor: "#1A1008" }}
     >
+      {/* Subtle radial glow accents (video placeholder) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 30% 60%, rgba(245,160,122,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(107,79,160,0.05) 0%, transparent 50%)",
+        }}
+      />
+
       {/* Dark gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(26,16,8,0.7) 0%, rgba(26,16,8,0.4) 50%, rgba(26,16,8,0.9) 100%)",
-        }}
-      />
-
-      {/* Background video placeholder */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 30% 60%, rgba(245,160,122,0.07) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(107,79,160,0.05) 0%, transparent 50%)",
+            "linear-gradient(to bottom, rgba(26,16,8,0.6) 0%, rgba(26,16,8,0.2) 50%, rgba(26,16,8,0.85) 100%)",
         }}
       />
 
@@ -79,7 +79,7 @@ export default function FooterSection() {
                   <a
                     href="#"
                     style={{ color: "rgba(245,237,227,0.55)", fontSize: "13px" }}
-                    className="hover:text-cream transition-colors"
+                    className="hover:opacity-100 transition-opacity"
                   >
                     {item}
                   </a>
@@ -89,7 +89,7 @@ export default function FooterSection() {
           </div>
         </motion.div>
 
-        {/* Row 2: Large "Juan [dot] Mora" names */}
+        {/* Row 2: Large "Juan [dot] Mora" names — NO overflow-hidden */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -107,14 +107,14 @@ export default function FooterSection() {
             Juan
           </h2>
 
-          {/* Small logo / dot between names */}
+          {/* Small salmon dot logo between names */}
           <div
             className="flex-shrink-0 rounded-full"
             style={{
               width: "clamp(10px, 1.5vw, 20px)",
               height: "clamp(10px, 1.5vw, 20px)",
               backgroundColor: "#F5A07A",
-              marginBottom: "0.2em",
+              alignSelf: "center",
             }}
           />
 
