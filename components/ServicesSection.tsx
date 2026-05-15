@@ -9,7 +9,7 @@ interface ImagePlaceholderProps {
 function ImagePlaceholder({ gradient }: ImagePlaceholderProps) {
   return (
     <div
-      className="flex-shrink-0 rounded-xl overflow-hidden"
+      className="flex-shrink-0 rounded-xl"
       style={{ width: "200px", height: "150px", background: gradient }}
     />
   );
@@ -110,7 +110,7 @@ function ServiceRow({ service, index }: ServiceRowProps) {
 
 export default function ServicesSection() {
   return (
-    <section className="bg-cream px-4 md:px-10 py-16 md:py-24">
+    <section className="section bg-cream px-4 md:px-10 py-16 md:py-24">
       {/* Headline wrapper */}
       <div className="service-headline-wrapper mb-10 md:mb-14">
         <motion.div
@@ -139,8 +139,8 @@ export default function ServicesSection() {
         </motion.h1>
       </div>
 
-      {/* Services list */}
-      <ul className="main-wrapper-services list-none p-0 m-0">
+      {/* Services list — top border before first item */}
+      <ul className="main-wrapper-services list-none p-0 m-0 border-t border-muted/20">
         {services.map((service, i) => (
           <ServiceRow key={service.title} service={service} index={i} />
         ))}
