@@ -1,8 +1,9 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import StatsSection from "@/components/StatsSection";
-import WorkSection from "@/components/WorkSection";
+import ServicesSection from "@/components/ServicesSection";
 import CtaSection from "@/components/CtaSection";
+import FooterSection from "@/components/FooterSection";
 
 export default function Home() {
   return (
@@ -10,8 +11,9 @@ export default function Home() {
       <Navbar theme="dark" />
       <Hero />
       <StatsSection />
-      <WorkSection />
+      <ServicesSection />
       <CtaSection />
+      <FooterSection />
     </main>
   );
 }

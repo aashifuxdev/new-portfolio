@@ -26,7 +26,7 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
           isDark ? "text-cream" : "text-dark-warm"
         )}
       >
-        Juan<span className="mx-1 text-salmon">•</span>Mora
+        Aashif<span className="mx-1 text-salmon">•</span>Ali
       </Link>
 
       {/* Center pill nav */}
