@@ -3,122 +3,138 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
-// ─── Individual card designs ───────────────────────────────────────────────
+// ─── Card template ───────────────────────────────────────────────────
+
+function ProjectCard({
+  label,
+  accent,
+  visual,
+  bottomText,
+}: {
+  label: string;
+  accent: string;
+  visual: React.ReactNode;
+  bottomText: string;
+}) {
+  return (
+    <div className="w-full h-full bg-[#0D0D0D] flex flex-col justify-between p-3 md:p-5">
+      <p className="font-mono opacity-70" style={{ color: accent, fontSize: "clamp(7px,0.9vw,11px)" }}>
+        {label} ///
+      </p>
+      <div className="flex flex-col items-center justify-center gap-1 flex-1 py-2">
+        {visual}
+      </div>
+      <p className="font-mono opacity-40 self-end text-right leading-tight" style={{ color: accent, fontSize: "clamp(5px,0.7vw,9px)" }}>
+        {bottomText}
+      </p>
+    </div>
+  );
+}
+
+// ─── Individual cards ───────────────────────────────────────────────────
 
 function TopTraderCard() {
   return (
-    <div className="w-full h-full bg-[#0D0D0D] flex flex-col justify-between p-3 md:p-5">
-      <div>
-        <p className="text-[#00FF9F] font-mono opacity-70 mb-0.5" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>
-          PREPARE YOURSELF ///
-        </p>
-        <p className="text-[#00FF9F] font-mono opacity-50" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>1 REMEMBER</p>
-        <p className="text-[#00FF9F] font-mono opacity-50" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>2 TRUST YOUR INSTINCTS</p>
-        <p className="text-[#00FF9F] font-mono opacity-50" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>3 OBEY YOUR INSTINCTS</p>
-      </div>
-      <div className="flex flex-col items-center gap-1">
-        <svg viewBox="0 0 48 48" fill="none" style={{ width: "clamp(24px,3.5vw,44px)", height: "clamp(24px,3.5vw,44px)" }}>
-          <rect x="1.5" y="1.5" width="45" height="45" stroke="#00FF9F" strokeWidth="3" />
-          <path d="M11 11 L24 27 L37 11" stroke="#00FF9F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          <line x1="24" y1="27" x2="24" y2="39" stroke="#00FF9F" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-        <span className="text-[#00FF9F] font-bold tracking-widest" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
-          TopTrader
-        </span>
-      </div>
-      <div className="self-end text-right">
-        <p className="text-[#00FF9F] font-mono opacity-50 leading-tight" style={{ fontSize: "clamp(5px,0.7vw,8px)" }}>
-          DO YOU HAVE<br />WHAT IT TAKES<br />TO BE THE<br />TOP TRADER?
-        </p>
-      </div>
-    </div>
+    <ProjectCard
+      label="TOPTRADER"
+      accent="#00FF9F"
+      bottomText={"DO YOU HAVE\nWHAT IT TAKES\nTO BE THE\nTOP TRADER?"}
+      visual={
+        <div className="flex flex-col items-center gap-1">
+          <svg viewBox="0 0 48 48" fill="none" style={{ width: "clamp(22px,3vw,40px)", height: "clamp(22px,3vw,40px)" }}>
+            <rect x="1.5" y="1.5" width="45" height="45" stroke="#00FF9F" strokeWidth="3" />
+            <path d="M11 11 L24 27 L37 11" stroke="#00FF9F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <line x1="24" y1="27" x2="24" y2="39" stroke="#00FF9F" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+          <span className="font-bold tracking-widest text-[#00FF9F]" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
+            TopTrader
+          </span>
+        </div>
+      }
+    />
   );
 }
 
 function GoogleCard() {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-yellow-500 flex flex-col justify-between p-3 md:p-5 relative overflow-hidden">
-      <div>
-        <p className="text-yellow-900 font-mono opacity-70 mb-0.5" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>
-          GOOGLE MAPS ///
-        </p>
-        <p className="text-yellow-900 font-mono opacity-50" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>WEB DESIGN</p>
-      </div>
-      <div className="flex items-center gap-2">
-        <svg viewBox="0 0 24 24" fill="none" style={{ width: "clamp(18px,2.5vw,30px)", height: "clamp(18px,2.5vw,30px)" }}>
-          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#78350f" />
-        </svg>
-        <span className="text-yellow-900 font-bold tracking-wide" style={{ fontSize: "clamp(9px,1.2vw,15px)" }}>
-          Google
-        </span>
-      </div>
-      <p className="text-yellow-900 font-mono opacity-50 self-end" style={{ fontSize: "clamp(5px,0.7vw,8px)" }}>
-        LOCAL GUIDE
-      </p>
-    </div>
+    <ProjectCard
+      label="GOOGLE MAPS"
+      accent="#FBBC04"
+      bottomText={"LOCAL\nGUIDE"}
+      visual={
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className="rounded-full flex items-center justify-center"
+            style={{ width: "clamp(22px,3vw,40px)", height: "clamp(22px,3vw,40px)", backgroundColor: "#FBBC04" }}
+          >
+            <svg viewBox="0 0 24 24" fill="#0a0604" style={{ width: "60%", height: "60%" }}>
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+          </div>
+          <span className="font-bold tracking-widest text-[#FBBC04]" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
+            Google
+          </span>
+        </div>
+      }
+    />
   );
 }
 
 function DinoRunnerCard() {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-[#1a0533] to-[#0a0015] flex flex-col justify-between p-3 md:p-5">
-      <div>
-        <p className="text-[#C084FC] font-mono opacity-70 mb-0.5" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>
-          DINO RUNNER ///
-        </p>
-        <p className="text-[#C084FC] font-mono opacity-50" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>GAME DESIGN</p>
-      </div>
-      <div className="flex flex-col items-center gap-1">
-        <span style={{ fontSize: "clamp(20px,3vw,36px)" }}>🦕</span>
-        <span className="text-[#C084FC] font-bold tracking-widest" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
-          DINO RUNNER
-        </span>
-      </div>
-      <p className="text-[#C084FC] font-mono opacity-50 self-end leading-tight" style={{ fontSize: "clamp(5px,0.7vw,8px)" }}>
-        ENDLESS RUNNER<br />GAME
-      </p>
-    </div>
+    <ProjectCard
+      label="DINO RUNNER"
+      accent="#C084FC"
+      bottomText={"ENDLESS\nRUNNER GAME"}
+      visual={
+        <div className="flex flex-col items-center gap-1">
+          <span style={{ fontSize: "clamp(18px,2.8vw,34px)", lineHeight: 1 }}>🦕</span>
+          <span className="font-bold tracking-widest text-[#C084FC]" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
+            Dino Runner
+          </span>
+        </div>
+      }
+    />
   );
 }
 
 function AlenaCard() {
   return (
-    <div className="w-full h-full bg-gradient-to-br from-[#F5A07A] to-[#E8855A] flex flex-col justify-between p-3 md:p-5">
-      <div>
-        <p className="text-white/70 font-mono mb-0.5" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>
-          ALENA ///
-        </p>
-        <p className="text-white/50 font-mono" style={{ fontSize: "clamp(7px,0.9vw,11px)" }}>PRODUCT DESIGN</p>
-      </div>
-      <div className="flex flex-col items-center gap-1">
-        <div className="rounded-full bg-white/25" style={{ width: "clamp(22px,3vw,38px)", height: "clamp(22px,3vw,38px)" }} />
-        <span className="text-white font-bold tracking-widest" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
-          ALENA
-        </span>
-      </div>
-      <p className="text-white/50 font-mono self-end leading-tight" style={{ fontSize: "clamp(5px,0.7vw,8px)" }}>
-        UI/UX<br />ENHANCEMENT
-      </p>
-    </div>
+    <ProjectCard
+      label="ALENA"
+      accent="#60A5FA"
+      bottomText={"PRODUCT\nDESIGN"}
+      visual={
+        <div className="flex flex-col items-center gap-1">
+          <div
+            className="rounded-full border-2 border-[#60A5FA]/60"
+            style={{ width: "clamp(22px,3vw,40px)", height: "clamp(22px,3vw,40px)" }}
+          />
+          <span className="font-bold tracking-widest text-[#60A5FA]" style={{ fontSize: "clamp(7px,1vw,12px)" }}>
+            Alena
+          </span>
+        </div>
+      }
+    />
   );
 }
 
-// ─── Card registry ────────────────────────────────────────────────────────
+// ─── Card registry ─────────────────────────────────────────────────────
 
 type CardId = "toptrader" | "google" | "dino" | "alena";
 
-const CARDS: { id: CardId; label: string }[] = [
-  { id: "toptrader", label: "TopTrader" },
-  { id: "google",    label: "Google Maps" },
-  { id: "dino",      label: "Dino Runner" },
-  { id: "alena",     label: "Alena" },
+const CARDS: { id: CardId }[] = [
+  { id: "toptrader" },
+  { id: "google" },
+  { id: "dino" },
+  { id: "alena" },
 ];
 
 const CardComponents: Record<CardId, () => JSX.Element> = {
   toptrader: TopTraderCard,
-  google:    GoogleCard,
-  dino:      DinoRunnerCard,
-  alena:     AlenaCard,
+  google: GoogleCard,
+  dino: DinoRunnerCard,
+  alena: AlenaCard,
 };
 
 // ─── Hero ─────────────────────────────────────────────────────────────────
@@ -126,7 +142,7 @@ const CardComponents: Record<CardId, () => JSX.Element> = {
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   const [cardIndex, setCardIndex] = useState(0);
   useEffect(() => {
@@ -138,23 +154,17 @@ export default function Hero() {
   const ActiveCard = CardComponents[currentId];
 
   return (
-    <section ref={ref} className="relative h-[100dvh] w-full overflow-hidden bg-dark-warm">
-      {/* ── Background ── */}
+    <section
+      ref={ref}
+      className="relative min-h-[100dvh] w-full overflow-hidden"
+      style={{ background: "radial-gradient(ellipse at center, #3d2817 0%, #1a0f08 70%, #0a0604 100%)" }}
+    >
+      {/* Subtle dark overlay for depth */}
       <motion.div style={{ y: bgY }} className="absolute inset-0 w-full h-[110%]">
-        {/* gradient fallback */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#3D1F0E] via-[#2C1A0E] to-[#1A1008]" />
-        {/* hero photo — swap /hero-bg.jpg with real photo */}
-        <img
-          src="/hero-bg.jpg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-        />
-        {/* dark overlay */}
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        <div className="absolute inset-0 bg-black/20" />
       </motion.div>
 
-      <div className="relative z-20 h-full">
+      <div className="relative z-20 min-h-[100dvh] flex flex-col">
         {/* ── Top-left label ── */}
         <motion.p
           initial={{ opacity: 0, x: -20 }}
@@ -165,8 +175,8 @@ export default function Hero() {
           Design Engineer
         </motion.p>
 
-        {/* ── Centered names + rotating card ── */}
-        <div className="absolute bottom-0 left-0 right-0 flex justify-center items-end">
+        {/* ── Centered names + rotating card — pushed to lower third ── */}
+        <div className="flex-1 flex items-end justify-center pb-0">
           <div
             className="relative flex items-end justify-center"
             style={{ gap: "clamp(180px, 25vw, 320px)" }}
