@@ -71,9 +71,9 @@ export default function FooterSection() {
           transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="wrapper-content-footer _2 flex items-baseline justify-between"
         >
-          <h2 className="font-bold text-cream leading-none" style={{ fontSize: "clamp(5rem, 12vw, 14rem)", lineHeight: 0.9, letterSpacing: "-0.03em" }}>Juan</h2>
+          <h2 className="font-bold text-cream leading-none" style={{ fontSize: "clamp(5rem, 12vw, 14rem)", lineHeight: 0.9, letterSpacing: "-0.03em" }}>Aashif</h2>
           <div className="flex-shrink-0 rounded-full" style={{ width: "clamp(10px, 1.5vw, 20px)", height: "clamp(10px, 1.5vw, 20px)", backgroundColor: "#F5A07A", alignSelf: "center" }} />
-          <h2 className="font-bold text-cream leading-none" style={{ fontSize: "clamp(5rem, 12vw, 14rem)", lineHeight: 0.9, letterSpacing: "-0.03em" }}>Mora</h2>
+          <h2 className="font-bold text-cream leading-none" style={{ fontSize: "clamp(5rem, 12vw, 14rem)", lineHeight: 0.9, letterSpacing: "-0.03em" }}>Ali</h2>
         </motion.div>
 
         <motion.div
@@ -82,8 +82,8 @@ export default function FooterSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="wrapper-content-footer flex flex-col md:flex-row justify-between items-start md:items-end gap-2"
         >
-          <h3 style={{ color: "#8C8072", fontSize: "12px", fontWeight: 500 }}>Freelance Design Director <span style={{ color: "rgba(245,237,227,0.35)" }}>2026</span></h3>
-          <h3 style={{ color: "#8C8072", fontSize: "12px", fontWeight: 500 }}>Morable Design Studio <span style={{ color: "rgba(245,237,227,0.35)" }}>[Coming Soon]</span></h3>
+          <h3 style={{ color: "#8C8072", fontSize: "12px", fontWeight: 500 }}>Design Engineer <span style={{ color: "rgba(245,237,227,0.35)" }}>2026</span></h3>
+          <h3 style={{ color: "#8C8072", fontSize: "12px", fontWeight: 500 }}>aash.if.ux@gmail.com</h3>
         </motion.div>
       </div>
     </section>

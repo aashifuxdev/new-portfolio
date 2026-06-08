@@ -13,7 +13,6 @@ export default function CtaSection() {
   const [copied, setCopied] = useState(false);
   const [badgePos, setBadgePos] = useState({ x: 0, y: 0 });
 
-  // Track cursor globally while hovered so the badge follows everywhere in the row
   const trackMouse = useCallback((e: MouseEvent) => {
     setBadgePos({ x: e.clientX, y: e.clientY });
   }, []);
@@ -35,10 +34,7 @@ export default function CtaSection() {
   };
 
   return (
-    <section
-      className="px-4 md:px-10 py-16 md:py-24"
-      style={{ background: "#6d28d9" }}
-    >
+    <section className="px-4 md:px-10 py-16 md:py-24" style={{ background: "#6d28d9" }}>
       <motion.div
         ref={sectionRef}
         initial={{ opacity: 0, y: 40 }}
@@ -46,7 +42,7 @@ export default function CtaSection() {
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         className="relative rounded-3xl overflow-hidden"
       >
-        {/* Card background — animates to white on hover */}
+        {/* Card background */}
         <motion.div
           className="absolute inset-0"
           animate={{ background: hovered ? "#ffffff" : "#7c3aed" }}
@@ -59,11 +55,7 @@ export default function CtaSection() {
             animate={{ color: hovered ? "#1a1008" : "#ffffff" }}
             transition={{ duration: 0.3 }}
             className="font-bold max-w-[500px] mb-2"
-            style={{
-              fontSize: "clamp(24px, 4vw, 52px)",
-              lineHeight: "1.05",
-              letterSpacing: "-0.5px",
-            }}
+            style={{ fontSize: "clamp(24px, 4vw, 52px)", lineHeight: "1.05", letterSpacing: "-0.5px" }}
           >
             Let&apos;s build something people remember
           </motion.h2>
@@ -77,7 +69,7 @@ export default function CtaSection() {
             from global tech companies to growing startups.
           </motion.p>
 
-          {/* CTA row — hover triggers bg + text change + cursor badge */}
+          {/* CTA row */}
           <div
             className="flex items-center justify-between cursor-none"
             onMouseEnter={() => setHovered(true)}
@@ -93,33 +85,24 @@ export default function CtaSection() {
               →
             </motion.span>
 
-            {/* Sliding text: "Let's talk" ↔ email */}
-            <div
-              className="overflow-hidden relative"
-              style={{ height: "clamp(28px, 4vw, 58px)" }}
-            >
-              {/* "Let's talk" — exits up */}
+            {/* "Let's talk" / email swap */}
+            <div className="relative overflow-hidden" style={{ height: "clamp(32px, 4.5vw, 64px)" }}>
+              {/* Let's talk — slides out up on hover */}
               <motion.span
-                animate={{
-                  y: hovered ? "-115%" : "0%",
-                  color: hovered ? "#1a1008" : "#ffffff",
-                }}
-                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                 className="absolute right-0 top-0 font-bold leading-none whitespace-nowrap select-none"
-                style={{ fontSize: "clamp(26px, 4vw, 58px)" }}
+                style={{ fontSize: "clamp(28px, 4.5vw, 64px)", color: "#ffffff" }}
+                animate={{ y: hovered ? "-110%" : "0%", opacity: hovered ? 0 : 1 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
                 Let&apos;s talk
               </motion.span>
 
-              {/* Email — enters from below */}
+              {/* Email — slides in from below on hover */}
               <motion.span
-                animate={{
-                  y: hovered ? "-50%" : "60%",
-                  color: "#1a1008",
-                }}
-                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute right-0 top-1/2 font-bold leading-none whitespace-nowrap select-none"
-                style={{ fontSize: "clamp(14px, 2.2vw, 34px)" }}
+                className="absolute right-0 bottom-0 font-bold leading-none whitespace-nowrap select-none"
+                style={{ fontSize: "clamp(14px, 2.2vw, 34px)", color: "#1a1008" }}
+                animate={{ y: hovered ? "0%" : "110%", opacity: hovered ? 1 : 0 }}
+                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
                 {EMAIL}
               </motion.span>
@@ -128,7 +111,7 @@ export default function CtaSection() {
         </div>
       </motion.div>
 
-      {/* Cursor badge — follows mouse, only while hovering the CTA row */}
+      {/* Cursor badge */}
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -136,7 +119,7 @@ export default function CtaSection() {
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.75 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: 0.15 }}
             className="fixed z-[9999] pointer-events-none select-none"
             style={{ left: badgePos.x + 18, top: badgePos.y - 16 }}
           >

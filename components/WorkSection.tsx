@@ -225,7 +225,7 @@ export default function WorkSection() {
 
   return (
     // Outer scroll container — height gives scroll budget for each card step
-    <div ref={containerRef} style={{ height: `${(STEPS + 1) * 100}vh` }}>
+    <div ref={containerRef} style={{ height: "300vh" }}>
       {/* Sticky viewport */}
       <div className="sticky top-0 h-[100dvh] bg-cream flex flex-col overflow-hidden">
 
