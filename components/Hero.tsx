@@ -31,10 +31,10 @@ export default function Hero() {
       {/* ── Background photo ──────────────────────────────────────────── */}
       <div className="absolute inset-0 bg-[#1a0f08]">
         <img
-          src="/hero-photo.jpg"
+          src="/hero-bg.jpg"
           alt=""
-          className="w-full h-full object-cover object-center opacity-60"
-          style={{ filter: "blur(6px)", transform: "scale(1.05)" }}
+          className="w-full h-full object-cover object-center opacity-65"
+          style={{ filter: "blur(2px)", transform: "scale(1.04)" }}
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50" />
@@ -62,22 +62,13 @@ export default function Hero() {
           className="flex-shrink-0 overflow-hidden flex items-end"
           style={{ width: aashifWidth }}
         >
-          {/*
-            USER: swap the <span> below for your SVG:
-            <img
-              src="/aashif.svg"
-              alt="AASHIF"
-              draggable={false}
-              className="select-none max-w-none"
-              style={{ height: "clamp(52px, 11vw, 160px)", width: "auto" }}
-            />
-          */}
-          <span
-            className="whitespace-nowrap font-bold leading-[0.85] select-none text-[#E8D5C4]"
-            style={{ fontSize: "clamp(52px, 11vw, 160px)", letterSpacing: "-0.02em" }}
-          >
-            AASHIF
-          </span>
+          <img
+            src="/aashif.svg"
+            alt="AASHIF"
+            draggable={false}
+            className="select-none max-w-none"
+            style={{ height: "clamp(52px, 11vw, 155px)", width: "auto" }}
+          />
         </motion.div>
 
         {/* Center photo */}
@@ -90,7 +81,7 @@ export default function Hero() {
           }}
         >
           <img
-            src="/hero-photo.jpg"
+            src="/hero-photo.png"
             alt="Aashif Ali"
             className="w-full h-full object-cover object-top"
           />
@@ -107,22 +98,13 @@ export default function Hero() {
           className="flex-1 overflow-hidden flex items-end justify-end"
           style={{ width: aliWidth, minWidth: 0 }}
         >
-          {/*
-            USER: swap the <span> below for your SVG:
-            <img
-              src="/ali.svg"
-              alt="ALI"
-              draggable={false}
-              className="select-none max-w-none"
-              style={{ height: "clamp(52px, 11vw, 160px)", width: "auto" }}
-            />
-          */}
-          <span
-            className="whitespace-nowrap font-bold leading-[0.85] select-none text-[#E8D5C4]"
-            style={{ fontSize: "clamp(52px, 11vw, 160px)", letterSpacing: "-0.02em" }}
-          >
-            ALI
-          </span>
+          <img
+            src="/ali.svg"
+            alt="ALI"
+            draggable={false}
+            className="select-none max-w-none"
+            style={{ height: "clamp(52px, 11vw, 155px)", width: "auto" }}
+          />
         </motion.div>
       </motion.div>
     </section>
