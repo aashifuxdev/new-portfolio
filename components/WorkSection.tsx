@@ -1,82 +1,267 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import clsx from "clsx";
+import {
+  motion,
+  useScroll,
+  useMotionValueEvent,
+  AnimatePresence,
+} from "framer-motion";
+import { useRef, useState } from "react";
 
-interface CardProps {
-  title: string;
-  tag: string;
-  bg: string;
-  textColor?: string;
-  half?: boolean;
-  index: number;
+// ── Data ───────────────────────────────────────────────────────────────────
+
+const LEFT_CARD = {
+  category: "GAMING PLATFORM | WEB3",
+  title: "Designing the NFT rewards experience for competitive gaming",
+  accent: "#a855f7",
+};
+
+const RIGHT_CARDS = [
+  {
+    id: "buying",
+    category: "BUYING PLATFORM | B2C",
+    title:
+      "Revamping the Car Buying Experience: Designing Make & Model Page and Non-Assisted Journey",
+    accent: "#60a5fa",
+    bg: "#0f1923",
+    screenshot: "",
+  },
+  {
+    id: "toptrader",
+    category: "FINTECH | TRADING",
+    title: "TopTrader — Gamified Investment Platform for Retail Traders",
+    accent: "#00FF9F",
+    bg: "#001a0d",
+    screenshot: "",
+  },
+  {
+    id: "studio",
+    category: "BRAND IDENTITY | WEB",
+    title: "Morable Design Studio — Full Visual Identity System",
+    accent: "#f97316",
+    bg: "#1a0a06",
+    screenshot: "",
+  },
+];
+
+// Number of "scroll steps" = number of right cards
+const STEPS = RIGHT_CARDS.length; // 3
+
+// ── Left card ──────────────────────────────────────────────────────────────
+
+function LeftCard() {
+  return (
+    <div
+      className="w-full h-full flex flex-col justify-between p-6 md:p-8 rounded-2xl overflow-hidden"
+      style={{ background: "#0a0015" }}
+    >
+      {/* Top nav mock */}
+      <div className="flex items-center gap-3">
+        <div
+          className="w-6 h-6 rounded border border-white/20 flex items-center justify-center
+                     text-white/50 text-[10px] font-mono"
+        >
+          M
+        </div>
+        <span className="text-white/30 text-[10px] font-mono tracking-widest">MAVI</span>
+        <span className="ml-auto text-white/20 text-[9px] font-mono hidden md:block">
+          SOLUTIONS
+        </span>
+        <span className="text-white/20 text-[9px] font-mono hidden md:block">
+          CURRENT DEALS
+        </span>
+      </div>
+
+      {/* Center visual */}
+      <div className="flex-1 flex flex-col items-center justify-center py-4 gap-4">
+        <p
+          className="font-bold tracking-[0.15em] text-white/90 leading-tight text-center"
+          style={{
+            fontSize: "clamp(22px, 3.8vw, 58px)",
+            fontFamily: "monospace",
+            textShadow: "0 0 50px #a855f780",
+          }}
+        >
+          CLAIM
+          <br />
+          YOUR LOOT
+        </p>
+        {/* Glowing orb */}
+        <div
+          className="rounded-full"
+          style={{
+            width: "clamp(56px, 9vw, 130px)",
+            height: "clamp(56px, 9vw, 130px)",
+            background:
+              "radial-gradient(circle at 40% 35%, #ff9f43, #e84393, #a855f7, #1a0033)",
+            boxShadow: "0 0 70px #a855f750, 0 0 140px #a855f720",
+          }}
+        />
+      </div>
+
+      {/* Bottom label */}
+      <div className="border-t border-white/10 pt-4">
+        <p className="text-white/30 text-[9px] font-mono tracking-widest mb-2 uppercase">
+          {LEFT_CARD.category}
+        </p>
+        <div className="flex items-end justify-between gap-2">
+          <p className="text-white/60 text-xs md:text-sm font-medium leading-snug max-w-[80%]">
+            {LEFT_CARD.title}
+          </p>
+          <span className="text-white/30 text-base flex-shrink-0">→</span>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-function ProjectCard({ title, tag, bg, textColor = "text-white", half = false, index }: CardProps) {
+// ── Right card ─────────────────────────────────────────────────────────────
+
+function RightCard({ card }: { card: (typeof RIGHT_CARDS)[number] & { screenshot?: string } }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, delay: index * 0.09 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className={clsx(
-        "rounded-2xl overflow-hidden cursor-pointer group relative min-h-[480px]",
-        half ? "col-span-2 md:col-span-1" : "col-span-2",
-      )}
-      style={{ height: "480px" }}
+      key={card.id}
+      initial={{ opacity: 0, y: 36 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -28 }}
+      transition={{ duration: 0.48, ease: [0.16, 1, 0.3, 1] }}
+      className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col p-5 md:p-7"
+      style={{ background: card.bg }}
     >
-      <div className={clsx("w-full h-full flex flex-col justify-end p-6 md:p-8", bg)}>
-        <span className={clsx("text-xs font-medium mb-2 opacity-60", textColor)}>{tag}</span>
-        <h3 className={clsx("font-bold leading-tight text-xl md:text-2xl", textColor)}>{title}</h3>
-        <span className={clsx("absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-lg", textColor)}>↗</span>
+      {/* Screenshot */}
+      <div className="flex-1 rounded-xl overflow-hidden mb-4">
+        {card.screenshot ? (
+          <img
+            src={card.screenshot}
+            alt={card.title}
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div
+            className="w-full h-full flex flex-col gap-2 p-4"
+            style={{
+              border: `1px solid ${card.accent}18`,
+              background: `linear-gradient(160deg, ${card.bg}, ${card.accent}10)`,
+            }}
+          >
+            {/* Fake browser chrome */}
+            <div className="flex items-center gap-1.5 mb-1">
+              <div className="w-2 h-2 rounded-full opacity-30" style={{ background: card.accent }} />
+              <div className="w-2 h-2 rounded-full opacity-20" style={{ background: card.accent }} />
+              <div className="w-2 h-2 rounded-full opacity-10" style={{ background: card.accent }} />
+              <div className="flex-1 h-1.5 rounded-full ml-2 opacity-10" style={{ background: card.accent }} />
+            </div>
+            {/* Fake content rows */}
+            {[80, 60, 90, 50, 70].map((w, i) => (
+              <div
+                key={i}
+                className="h-2 rounded-full opacity-[0.07]"
+                style={{ width: `${w}%`, background: card.accent }}
+              />
+            ))}
+            <div className="flex gap-2 mt-2">
+              {[1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="flex-1 rounded-lg opacity-[0.06]"
+                  style={{ height: 48, background: card.accent }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Label + title */}
+      <div>
+        <p
+          className="text-[9px] font-mono tracking-widest mb-2 uppercase"
+          style={{ color: `${card.accent}70` }}
+        >
+          {card.category}
+        </p>
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-white/70 text-xs md:text-sm font-medium leading-snug">
+            {card.title}
+          </p>
+          <span className="text-white/25 text-base flex-shrink-0">→</span>
+        </div>
+      </div>
+
+      {/* Progress dots */}
+      <div className="flex gap-1.5 mt-4">
+        {RIGHT_CARDS.map((c) => (
+          <div
+            key={c.id}
+            className="h-[2px] rounded-full transition-all duration-300"
+            style={{
+              width: c.id === card.id ? 18 : 5,
+              background:
+                c.id === card.id ? card.accent : "rgba(255,255,255,0.18)",
+            }}
+          />
+        ))}
       </div>
     </motion.div>
   );
 }
 
-const cards = [
-  { title: "Google Maps Local Guide", tag: "Web Design", bg: "bg-gradient-to-br from-yellow-400 to-yellow-500", textColor: "text-yellow-900", half: false },
-  { title: "TopTrader Platform", tag: "Branding", bg: "bg-[#0D0D0D]", textColor: "text-[#00FF9F]", half: false },
-  { title: "Morable Design Studio", tag: "Web Design · Brand Identity", bg: "bg-gradient-to-br from-[#E8855A] to-[#C4593A]", textColor: "text-white", half: true },
-  { title: "Clean UI Kit", tag: "UI Design", bg: "bg-gradient-to-br from-slate-200 to-slate-300", textColor: "text-slate-700", half: true },
-  { title: "CLAIM", tag: "Landing Page", bg: "bg-gradient-to-br from-[#1a0533] to-[#0a0015]", textColor: "text-white", half: false },
-];
+// ── Section ────────────────────────────────────────────────────────────────
 
 export default function WorkSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Map scroll 0→1 across STEPS discrete card slots
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    const idx = Math.min(Math.floor(v * STEPS), STEPS - 1);
+    setActiveIdx(idx);
+  });
 
   return (
-    <section id="work" className="bg-cream py-16 md:py-24 px-4 md:px-10">
-      <div ref={ref} className="mb-10 md:mb-14">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-xs md:text-sm font-medium text-muted mb-3 md:mb-4"
-        >
-          Design Expert
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-muted font-bold"
-          style={{ fontSize: "clamp(36px, 7vw, 84px)", lineHeight: "90%", letterSpacing: "-0.4px" }}
-        >
-          I help companies to
-          <br />
-          succeed on projects like:
-        </motion.h2>
-      </div>
+    // Outer scroll container — height gives scroll budget for each card step
+    <div ref={containerRef} style={{ height: `${(STEPS + 1) * 100}vh` }}>
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-[100dvh] bg-cream flex flex-col overflow-hidden">
 
-      <div className="grid grid-cols-2 gap-3 md:gap-4 w-full">
-        {cards.map((card, i) => (
-          <ProjectCard key={i} index={i} title={card.title} tag={card.tag} bg={card.bg} textColor={card.textColor} half={card.half} />
-        ))}
+        {/* Title */}
+        <div className="px-4 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex-shrink-0">
+          <p className="text-[10px] font-medium text-muted mb-2.5 tracking-widest uppercase">
+            Selected Work
+          </p>
+          <h2
+            className="text-muted font-bold leading-[0.92]"
+            style={{
+              fontSize: "clamp(26px, 5vw, 64px)",
+              letterSpacing: "-0.3px",
+            }}
+          >
+            I help companies to
+            <br />
+            succeed on projects like:
+          </h2>
+        </div>
+
+        {/* Two-column cards */}
+        <div className="flex-1 min-h-0 px-4 md:px-10 pb-8 md:pb-10 flex gap-3 md:gap-4">
+          {/* Left — always Card 1 */}
+          <div className="flex-[0_0_58%] md:flex-[0_0_60%] relative">
+            <LeftCard />
+          </div>
+
+          {/* Right — animated card based on scroll */}
+          <div className="flex-1 relative">
+            <AnimatePresence mode="wait">
+              <RightCard key={RIGHT_CARDS[activeIdx].id} card={RIGHT_CARDS[activeIdx]} />
+            </AnimatePresence>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
