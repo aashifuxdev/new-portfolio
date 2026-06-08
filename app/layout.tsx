@@ -10,7 +10,7 @@ const geistSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Juan Mora — Freelance Design Director",
+  title: "Aashif Ali — Design Engineer",
   description: "Brand & Web Design Specialist. 16 years making users click and scroll.",
 };
 
