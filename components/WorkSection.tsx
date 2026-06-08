@@ -24,7 +24,7 @@ const RIGHT_CARDS = [
       "Revamping the Car Buying Experience: Designing Make & Model Page and Non-Assisted Journey",
     accent: "#60a5fa",
     bg: "#0f1923",
-    screenshot: "/work-dashboard.jpg",
+    screenshot: "",
   },
   {
     id: "toptrader",
@@ -138,13 +138,36 @@ function RightCard({ card }: { card: (typeof RIGHT_CARDS)[number] & { screenshot
           />
         ) : (
           <div
-            className="w-full h-full flex items-center justify-center"
+            className="w-full h-full flex flex-col gap-2 p-4"
             style={{
-              border: `1px solid ${card.accent}22`,
-              background: `linear-gradient(135deg, ${card.bg}, ${card.accent}12)`,
+              border: `1px solid ${card.accent}18`,
+              background: `linear-gradient(160deg, ${card.bg}, ${card.accent}10)`,
             }}
           >
-            <div className="w-10 h-10 rounded-lg opacity-20" style={{ background: card.accent }} />
+            {/* Fake browser chrome */}
+            <div className="flex items-center gap-1.5 mb-1">
+              <div className="w-2 h-2 rounded-full opacity-30" style={{ background: card.accent }} />
+              <div className="w-2 h-2 rounded-full opacity-20" style={{ background: card.accent }} />
+              <div className="w-2 h-2 rounded-full opacity-10" style={{ background: card.accent }} />
+              <div className="flex-1 h-1.5 rounded-full ml-2 opacity-10" style={{ background: card.accent }} />
+            </div>
+            {/* Fake content rows */}
+            {[80, 60, 90, 50, 70].map((w, i) => (
+              <div
+                key={i}
+                className="h-2 rounded-full opacity-[0.07]"
+                style={{ width: `${w}%`, background: card.accent }}
+              />
+            ))}
+            <div className="flex gap-2 mt-2">
+              {[1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="flex-1 rounded-lg opacity-[0.06]"
+                  style={{ height: 48, background: card.accent }}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
