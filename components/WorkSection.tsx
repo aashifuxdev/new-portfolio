@@ -24,6 +24,7 @@ const RIGHT_CARDS = [
       "Revamping the Car Buying Experience: Designing Make & Model Page and Non-Assisted Journey",
     accent: "#60a5fa",
     bg: "#0f1923",
+    screenshot: "/work-dashboard.jpg",
   },
   {
     id: "toptrader",
@@ -31,6 +32,7 @@ const RIGHT_CARDS = [
     title: "TopTrader — Gamified Investment Platform for Retail Traders",
     accent: "#00FF9F",
     bg: "#001a0d",
+    screenshot: "",
   },
   {
     id: "studio",
@@ -38,6 +40,7 @@ const RIGHT_CARDS = [
     title: "Morable Design Studio — Full Visual Identity System",
     accent: "#f97316",
     bg: "#1a0a06",
+    screenshot: "",
   },
 ];
 
@@ -114,7 +117,7 @@ function LeftCard() {
 
 // ── Right card ─────────────────────────────────────────────────────────────
 
-function RightCard({ card }: { card: (typeof RIGHT_CARDS)[number] }) {
+function RightCard({ card }: { card: (typeof RIGHT_CARDS)[number] & { screenshot?: string } }) {
   return (
     <motion.div
       key={card.id}
@@ -125,19 +128,25 @@ function RightCard({ card }: { card: (typeof RIGHT_CARDS)[number] }) {
       className="absolute inset-0 rounded-2xl overflow-hidden flex flex-col p-5 md:p-7"
       style={{ background: card.bg }}
     >
-      {/* Screenshot placeholder */}
-      <div
-        className="flex-1 rounded-xl overflow-hidden mb-4 flex items-center justify-center"
-        style={{
-          border: `1px solid ${card.accent}22`,
-          background: `linear-gradient(135deg, ${card.bg}, ${card.accent}12)`,
-        }}
-      >
-        {/* USER: swap with <img src={card.screenshot} … /> */}
-        <div
-          className="w-10 h-10 rounded-lg opacity-20"
-          style={{ background: card.accent }}
-        />
+      {/* Screenshot */}
+      <div className="flex-1 rounded-xl overflow-hidden mb-4">
+        {card.screenshot ? (
+          <img
+            src={card.screenshot}
+            alt={card.title}
+            className="w-full h-full object-cover object-top"
+          />
+        ) : (
+          <div
+            className="w-full h-full flex items-center justify-center"
+            style={{
+              border: `1px solid ${card.accent}22`,
+              background: `linear-gradient(135deg, ${card.bg}, ${card.accent}12)`,
+            }}
+          >
+            <div className="w-10 h-10 rounded-lg opacity-20" style={{ background: card.accent }} />
+          </div>
+        )}
       </div>
 
       {/* Label + title */}

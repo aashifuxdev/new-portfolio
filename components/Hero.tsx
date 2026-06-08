@@ -29,14 +29,15 @@ export default function Hero() {
       onMouseLeave={() => cursorX.set(0.5)}
     >
       {/* ── Background photo ──────────────────────────────────────────── */}
-      {/* USER: place your photo at /public/hero-bg.jpg — remove the gradient div below */}
       <div className="absolute inset-0 bg-[#1a0f08]">
-        <div
-          className="w-full h-full bg-cover bg-center opacity-70"
-          style={{ backgroundImage: "url('/hero-bg.jpg')" }}
+        <img
+          src="/hero-photo.jpg"
+          alt=""
+          className="w-full h-full object-cover object-center opacity-60"
+          style={{ filter: "blur(6px)", transform: "scale(1.05)" }}
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50" />
 
       {/* ── Design Engineer label ─────────────────────────────────────── */}
       <motion.p
@@ -88,15 +89,11 @@ export default function Hero() {
             zIndex: 10,
           }}
         >
-          {/*
-            USER: swap the gradient div below for your photo:
-            <img
-              src="/hero-photo.jpg"
-              alt="Aashif Ali"
-              className="w-full h-full object-cover object-top"
-            />
-          */}
-          <div className="w-full h-full bg-gradient-to-b from-[#4a3525] to-[#1a0f08]" />
+          <img
+            src="/hero-photo.jpg"
+            alt="Aashif Ali"
+            className="w-full h-full object-cover object-top"
+          />
 
           {/* "Design engineer" badge */}
           <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md rounded-full
