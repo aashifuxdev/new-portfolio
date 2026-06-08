@@ -6,7 +6,8 @@ import { useRef } from "react";
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const cursorX = useSpring(0.5, { stiffness: 50, damping: 20, mass: 0.8 });
+  // Spring-smoothed cursor position: 0 = far left, 1 = far right
+  const cursorX = useSpring(0.5, { stiffness: 60, damping: 20, mass: 0.6 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -14,9 +15,11 @@ export default function Hero() {
     cursorX.set((e.clientX - rect.left) / rect.width);
   };
 
-  // AASHIF shrinks left → grows right; ALI is inverse
-  const aashifFlex = useTransform(cursorX, [0, 1], [1, 4]);
-  const aliFlex    = useTransform(cursorX, [0, 1], [4, 1]);
+  // AASHIF: cursor left → shrinks to 14%, cursor right → grows to 50%
+  // ALI:    cursor left → grows to 50%, cursor right → shrinks to 14%
+  // Overflow hidden clips on the inner edge (image side)
+  const aashifWidth = useTransform(cursorX, [0, 1], ["14%", "50%"]);
+  const aliWidth    = useTransform(cursorX, [0, 1], ["50%", "14%"]);
 
   return (
     <section
@@ -48,50 +51,51 @@ export default function Hero() {
         Design Engineer
       </motion.p>
 
-      {/* Names + center photo — anchored to bottom */}
+      {/* Bottom row: AASHIF | photo | ALI */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end">
 
-        {/* AASHIF — flex grows/shrinks, text anchored left, clips right */}
+        {/* AASHIF — clips on RIGHT (inner) edge as width shrinks */}
         <motion.div
-          className="overflow-hidden flex-shrink-0 flex items-end pl-3 md:pl-6"
-          style={{ flex: aashifFlex, minWidth: 0 }}
+          className="overflow-hidden flex-shrink-0 flex items-end"
+          style={{ width: aashifWidth }}
         >
           <img
             src="/aashif.svg"
             alt="AASHIF"
             draggable={false}
-            className="select-none max-w-none block"
-            style={{ height: "clamp(56px, 12vw, 170px)", width: "auto" }}
+            className="block select-none max-w-none"
+            style={{ height: "clamp(56px, 12vw, 160px)", width: "auto" }}
           />
         </motion.div>
 
-        {/* Center photo */}
+        {/* Center photo — fixed 240×126, 20px radius */}
         <div
-          className="flex-shrink-0 rounded-t-3xl overflow-hidden relative z-10"
-          style={{ width: "clamp(150px, 18vw, 300px)", height: "clamp(180px, 26vw, 420px)" }}
+          className="flex-shrink-0 relative overflow-hidden"
+          style={{
+            width: 240,
+            height: 126,
+            borderRadius: 20,
+            zIndex: 10,
+          }}
         >
           <img
             src="/hero-photo.png"
             alt="Aashif Ali"
             className="w-full h-full object-cover object-top"
           />
-          <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-sm
-                          rounded-full px-3 py-1 border border-white/10">
-            <span className="text-white/60 text-[10px] font-medium">Design engineer</span>
-          </div>
         </div>
 
-        {/* ALI — flex grows/shrinks, text anchored right, clips left */}
+        {/* ALI — clips on LEFT (inner) edge as width shrinks */}
         <motion.div
-          className="overflow-hidden flex-shrink-0 flex items-end justify-end pr-3 md:pr-6"
-          style={{ flex: aliFlex, minWidth: 0 }}
+          className="overflow-hidden flex-shrink-0 flex items-end justify-end"
+          style={{ width: aliWidth, flex: 1, minWidth: 0 }}
         >
           <img
             src="/ali.svg"
             alt="ALI"
             draggable={false}
-            className="select-none max-w-none block"
-            style={{ height: "clamp(56px, 12vw, 170px)", width: "auto" }}
+            className="block select-none max-w-none"
+            style={{ height: "clamp(56px, 12vw, 160px)", width: "auto" }}
           />
         </motion.div>
 
