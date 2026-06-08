@@ -62,7 +62,7 @@ export default function StatsSection() {
         animate={isInView ? "visible" : "hidden"}
         className="w-full"
       >
-        <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>16 years</motion.p>
+        <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>4 years</motion.p>
         <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>making users</motion.p>
 
         <motion.div variants={wordVariants} className="flex flex-wrap items-baseline" style={{ gap: "0 0.25em" }}>
