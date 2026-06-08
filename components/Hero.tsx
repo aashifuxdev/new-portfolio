@@ -6,8 +6,7 @@ import { useRef } from "react";
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Spring-smoothed cursor position: 0 = far left, 1 = far right
-  const cursorX = useSpring(0.5, { stiffness: 55, damping: 18, mass: 0.6 });
+  const cursorX = useSpring(0.5, { stiffness: 50, damping: 20, mass: 0.8 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -15,10 +14,9 @@ export default function Hero() {
     cursorX.set((e.clientX - rect.left) / rect.width);
   };
 
-  // AASHIF: shrinks when cursor moves left, grows when cursor moves right
-  // ALI:    grows  when cursor moves left, shrinks when cursor moves right
-  const aashifWidth = useTransform(cursorX, [0, 1], ["14%", "50%"]);
-  const aliWidth    = useTransform(cursorX, [0, 1], ["50%", "14%"]);
+  // AASHIF shrinks left → grows right; ALI is inverse
+  const aashifFlex = useTransform(cursorX, [0, 1], [1, 4]);
+  const aliFlex    = useTransform(cursorX, [0, 1], [4, 1]);
 
   return (
     <section
@@ -28,85 +26,76 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={() => cursorX.set(0.5)}
     >
-      {/* ── Background photo ──────────────────────────────────────────── */}
-      <div className="absolute inset-0 bg-[#1a0f08]">
+      {/* Background */}
+      <div className="absolute inset-0">
         <img
           src="/hero-bg.jpg"
           alt=""
-          className="w-full h-full object-cover object-center opacity-65"
-          style={{ filter: "blur(2px)", transform: "scale(1.04)" }}
+          className="w-full h-full object-cover object-center"
+          style={{ filter: "brightness(0.55)" }}
         />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
-      {/* ── Design Engineer label ─────────────────────────────────────── */}
+      {/* Design Engineer label */}
       <motion.p
-        initial={{ opacity: 0, x: -12 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.7, delay: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
         className="absolute top-20 md:top-24 left-4 md:left-10 z-20
                    text-salmon text-xs font-medium tracking-widest uppercase"
       >
         Design Engineer
       </motion.p>
 
-      {/* ── Bottom name row ───────────────────────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.2 }}
-        className="absolute bottom-0 left-0 right-0 z-20 flex items-end"
-      >
-        {/* AASHIF — text anchored left; right edge clips as width shrinks */}
+      {/* Names + center photo — anchored to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end">
+
+        {/* AASHIF — flex grows/shrinks, text anchored left, clips right */}
         <motion.div
-          className="flex-shrink-0 overflow-hidden flex items-end"
-          style={{ width: aashifWidth }}
+          className="overflow-hidden flex-shrink-0 flex items-end pl-3 md:pl-6"
+          style={{ flex: aashifFlex, minWidth: 0 }}
         >
           <img
             src="/aashif.svg"
             alt="AASHIF"
             draggable={false}
-            className="select-none max-w-none"
-            style={{ height: "clamp(52px, 11vw, 155px)", width: "auto" }}
+            className="select-none max-w-none block"
+            style={{ height: "clamp(56px, 12vw, 170px)", width: "auto" }}
           />
         </motion.div>
 
         {/* Center photo */}
         <div
-          className="relative flex-shrink-0 rounded-t-[2rem] overflow-hidden"
-          style={{
-            width: "clamp(160px, 20vw, 340px)",
-            height: "clamp(190px, 30vw, 460px)",
-            zIndex: 10,
-          }}
+          className="flex-shrink-0 rounded-t-3xl overflow-hidden relative z-10"
+          style={{ width: "clamp(150px, 18vw, 300px)", height: "clamp(180px, 26vw, 420px)" }}
         >
           <img
             src="/hero-photo.png"
             alt="Aashif Ali"
             className="w-full h-full object-cover object-top"
           />
-
-          {/* "Design engineer" badge */}
-          <div className="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md rounded-full
-                          px-3 py-1.5 border border-white/10">
-            <span className="text-white/60 text-[11px] font-medium">Design engineer</span>
+          <div className="absolute bottom-3 right-3 bg-black/50 backdrop-blur-sm
+                          rounded-full px-3 py-1 border border-white/10">
+            <span className="text-white/60 text-[10px] font-medium">Design engineer</span>
           </div>
         </div>
 
-        {/* ALI — text anchored right; left edge clips as width shrinks */}
+        {/* ALI — flex grows/shrinks, text anchored right, clips left */}
         <motion.div
-          className="flex-1 overflow-hidden flex items-end justify-end"
-          style={{ width: aliWidth, minWidth: 0 }}
+          className="overflow-hidden flex-shrink-0 flex items-end justify-end pr-3 md:pr-6"
+          style={{ flex: aliFlex, minWidth: 0 }}
         >
           <img
             src="/ali.svg"
             alt="ALI"
             draggable={false}
-            className="select-none max-w-none"
-            style={{ height: "clamp(52px, 11vw, 155px)", width: "auto" }}
+            className="select-none max-w-none block"
+            style={{ height: "clamp(56px, 12vw, 170px)", width: "auto" }}
           />
         </motion.div>
-      </motion.div>
+
+      </div>
     </section>
   );
 }
