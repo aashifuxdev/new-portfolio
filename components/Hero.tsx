@@ -55,9 +55,9 @@ export default function Hero() {
       {/* Bottom row — names scale with flex, image is fixed */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end">
 
-        {/* AASHIF — width stretches, height fixed */}
+        {/* AASHIF — width stretches, height fixed, flush to left edge */}
         <motion.div
-          className="flex items-end pb-1 pl-2 md:pl-4"
+          className="flex items-end"
           style={{ flex: aashifFlex, minWidth: 0 }}
         >
           <img
@@ -85,9 +85,9 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ALI — width stretches, height fixed */}
+        {/* ALI — width stretches, height fixed, flush to right edge */}
         <motion.div
-          className="flex items-end justify-end pb-1 pr-2 md:pr-4"
+          className="flex items-end justify-end"
           style={{ flex: aliFlex, minWidth: 0 }}
         >
           <img
