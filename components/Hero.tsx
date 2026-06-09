@@ -55,7 +55,7 @@ export default function Hero() {
       {/* Bottom row — names scale with flex, image is fixed */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end">
 
-        {/* AASHIF — scales up/down, always fully visible */}
+        {/* AASHIF — width stretches, height fixed */}
         <motion.div
           className="flex items-end pb-1 pl-2 md:pl-4"
           style={{ flex: aashifFlex, minWidth: 0 }}
@@ -64,8 +64,8 @@ export default function Hero() {
             src="/aashif.svg"
             alt="AASHIF"
             draggable={false}
-            className="block select-none w-full h-auto"
-            style={{ minWidth: 60 }}
+            className="block select-none"
+            style={{ width: "100%", height: "clamp(60px, 11vw, 150px)" }}
           />
         </motion.div>
 
@@ -85,7 +85,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ALI — scales up/down, always fully visible */}
+        {/* ALI — width stretches, height fixed */}
         <motion.div
           className="flex items-end justify-end pb-1 pr-2 md:pr-4"
           style={{ flex: aliFlex, minWidth: 0 }}
@@ -94,8 +94,8 @@ export default function Hero() {
             src="/ali.svg"
             alt="ALI"
             draggable={false}
-            className="block select-none w-full h-auto"
-            style={{ minWidth: 40 }}
+            className="block select-none"
+            style={{ width: "100%", height: "clamp(60px, 11vw, 150px)" }}
           />
         </motion.div>
 
