@@ -5,7 +5,7 @@ import { useRef, useEffect, useState } from "react";
 
 const headingStyle = {
   fontSize: "clamp(60px, 10vw, 130px)",
-  fontWeight: 700,
+  fontWeight: 600,
   lineHeight: "115%",
   letterSpacing: "-0.35vw",
 } as const;
