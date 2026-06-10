@@ -231,19 +231,15 @@ export default function WorkSection() {
 
         {/* Title */}
         <div className="px-4 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex-shrink-0">
-          <p className="text-[10px] font-medium text-muted mb-2.5 tracking-widest uppercase">
-            Selected Work
-          </p>
           <h2
-            className="text-muted font-bold leading-[0.92]"
+            className="text-muted font-bold whitespace-nowrap"
             style={{
               fontSize: "clamp(26px, 5vw, 64px)",
-              letterSpacing: "-0.3px",
+              letterSpacing: "-0.35vw",
+              lineHeight: "115%",
             }}
           >
-            I help companies to
-            <br />
-            succeed on projects like:
+            I help companies to succeed on projects like:
           </h2>
         </div>
 
