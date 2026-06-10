@@ -235,7 +235,7 @@ export default function WorkSection() {
             className="text-muted font-bold whitespace-nowrap"
             style={{
               fontSize: "clamp(26px, 5vw, 64px)",
-              letterSpacing: "0.15em",
+              letterSpacing: "0.04em",
               lineHeight: "115%",
             }}
           >
