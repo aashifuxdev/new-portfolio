@@ -62,8 +62,8 @@ export default function StatsSection() {
         animate={isInView ? "visible" : "hidden"}
         className="w-full"
       >
-        <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>4 years</motion.p>
-        <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>making users</motion.p>
+        <motion.p variants={wordVariants} className="text-[#1b1b1b] block" style={headingStyle}>4 years</motion.p>
+        <motion.p variants={wordVariants} className="text-[#1b1b1b] block" style={headingStyle}>making users</motion.p>
 
         <motion.div variants={wordVariants} className="flex flex-wrap items-baseline" style={{ gap: "0 0.25em" }}>
           <span className="relative inline-block">
@@ -75,14 +75,14 @@ export default function StatsSection() {
             />
             <span className="relative text-cream font-semibold px-[0.2em]" style={headingStyle}>click</span>
           </span>
-          <span className="text-muted font-semibold" style={headingStyle}>and</span>
+          <span className="text-[#1b1b1b] font-semibold" style={headingStyle}>and</span>
           <span className="text-purple-600 font-semibold inline-flex items-baseline" style={headingStyle}>
             scro<span>ll</span>
             {isInView && <BlinkingCursor />}
           </span>
         </motion.div>
 
-        <motion.p variants={wordVariants} className="text-muted block" style={headingStyle}>my designs</motion.p>
+        <motion.p variants={wordVariants} className="text-[#1b1b1b] block" style={headingStyle}>my designs</motion.p>
       </motion.div>
     </section>
   );
