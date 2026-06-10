@@ -1,27 +1,18 @@
 "use client";
 
 import { motion, useSpring, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
-  const [cursorVisible, setCursorVisible] = useState(false);
 
   // Spring-smoothed cursor position: 0 = far left, 1 = far right
   const cursorX = useSpring(0.5, { stiffness: 55, damping: 18, mass: 0.6 });
-
-  const dotX = useSpring(-100, { stiffness: 120, damping: 20, mass: 0.5 });
-  const dotY = useSpring(-100, { stiffness: 120, damping: 20, mass: 0.5 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
     cursorX.set((e.clientX - rect.left) / rect.width);
-    dotX.set(e.clientX - rect.left);
-    dotY.set(e.clientY - rect.top);
-    setCursorPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    setCursorVisible(true);
   };
 
   // AASHIF: shrinks when cursor moves left, grows when cursor moves right
@@ -33,9 +24,8 @@ export default function Hero() {
     <section
       ref={sectionRef}
       className="relative h-[100dvh] w-full overflow-hidden"
-      style={{ cursor: "none" }}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => { cursorX.set(0.5); setCursorVisible(false); }}
+      onMouseLeave={() => cursorX.set(0.5)}
     >
       {/* ── Background photo ──────────────────────────────────────────── */}
       <div className="absolute inset-0 bg-[#1a0f08]">
@@ -47,19 +37,6 @@ export default function Hero() {
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/50" />
-
-      {/* ── Custom cursor ─────────────────────────────────────────────── */}
-      <motion.div
-        className="pointer-events-none absolute z-50"
-        style={{ x: dotX, y: dotY, translateX: "-50%", translateY: "-50%" }}
-        animate={{ opacity: cursorVisible ? 1 : 0 }}
-        transition={{ opacity: { duration: 0.2 } }}
-      >
-        {/* outer ring */}
-        <div className="w-10 h-10 rounded-full border border-white/60 absolute -translate-x-1/2 -translate-y-1/2" />
-        {/* inner dot */}
-        <div className="w-2 h-2 rounded-full bg-white absolute -translate-x-1/2 -translate-y-1/2" />
-      </motion.div>
 
       {/* ── Design Engineer label ─────────────────────────────────────── */}
       <motion.p
