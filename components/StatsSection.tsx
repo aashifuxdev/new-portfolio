@@ -5,8 +5,8 @@ import { useRef, useEffect, useState } from "react";
 
 const headingStyle = {
   fontSize: "clamp(60px, 10vw, 130px)",
-  fontWeight: 600,
-  lineHeight: "105%",
+  fontWeight: 700,
+  lineHeight: "115%",
   letterSpacing: "-0.35vw",
 } as const;
 
@@ -73,7 +73,7 @@ export default function StatsSection() {
               transition={{ duration: 0.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="absolute inset-0 bg-purple-600 rounded-full origin-left"
             />
-            <span className="relative text-cream font-semibold px-[0.2em]" style={headingStyle}>click</span>
+            <span className="relative text-white font-semibold px-[0.2em]" style={headingStyle}>click</span>
           </span>
           <span className="text-[#1b1b1b] font-semibold" style={headingStyle}>and</span>
           <span className="text-purple-600 font-semibold inline-flex items-baseline" style={headingStyle}>
