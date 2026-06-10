@@ -4,7 +4,7 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 const headingStyle = {
-  fontSize: "clamp(42px, 6.5vw, 78px)",
+  fontSize: "clamp(52px, 8.5vw, 112px)",
   fontWeight: 600,
   lineHeight: "105%",
   letterSpacing: "-0.35vw",
@@ -39,7 +39,7 @@ export default function StatsSection() {
   };
 
   return (
-    <section className="min-h-[100dvh] bg-cream flex items-center relative overflow-hidden px-4 md:px-10 py-24">
+    <section className="h-[100dvh] bg-cream flex items-center relative overflow-hidden px-4 md:px-10">
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden md:flex gap-2 items-end h-52">
         <motion.div
           initial={{ scaleY: 0 }}
