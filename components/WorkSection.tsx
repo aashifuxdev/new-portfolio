@@ -230,11 +230,11 @@ export default function WorkSection() {
       <div className="sticky top-0 h-[100dvh] bg-cream flex flex-col overflow-hidden">
 
         {/* Title */}
-        <div className="px-4 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex-shrink-0 flex justify-center">
+        <div className="px-4 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex-shrink-0">
           <h2
-            className="text-muted font-bold whitespace-nowrap text-center"
+            className="text-muted font-bold whitespace-nowrap"
             style={{
-              fontSize: "clamp(60px, 10vw, 130px)",
+              fontSize: "clamp(26px, 5vw, 64px)",
               letterSpacing: "0.02em",
               lineHeight: "115%",
             }}
