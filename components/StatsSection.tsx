@@ -18,7 +18,7 @@ function BlinkingCursor() {
   }, []);
   return (
     <span
-      className="inline-block w-[0.1em] h-[0.85em] bg-salmon align-middle ml-[0.05em]"
+      className="inline-block w-[0.1em] h-[0.85em] bg-purple-600 align-middle ml-[0.05em]"
       style={{ opacity: visible ? 1 : 0 }}
     />
   );
@@ -39,19 +39,19 @@ export default function StatsSection() {
   };
 
   return (
-    <section className="h-[100dvh] bg-cream flex items-center relative overflow-hidden px-4 md:px-10">
+    <section className="h-[100dvh] bg-white flex items-center relative overflow-hidden px-4 md:px-10">
       <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden md:flex gap-2 items-end h-52">
         <motion.div
           initial={{ scaleY: 0 }}
           animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
           transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
-          className="w-[3px] bg-salmon origin-bottom h-full"
+          className="w-[3px] bg-purple-600 origin-bottom h-full"
         />
         <motion.div
           initial={{ scaleY: 0 }}
           animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
           transition={{ duration: 0.8, delay: 1.1, ease: "easeOut" }}
-          className="w-[3px] bg-salmon origin-bottom h-3/4"
+          className="w-[3px] bg-purple-600 origin-bottom h-3/4"
         />
       </div>
 
@@ -71,12 +71,12 @@ export default function StatsSection() {
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
               transition={{ duration: 0.5, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 bg-salmon rounded-full origin-left"
+              className="absolute inset-0 bg-purple-600 rounded-full origin-left"
             />
             <span className="relative text-cream font-semibold px-[0.2em]" style={headingStyle}>click</span>
           </span>
           <span className="text-muted font-semibold" style={headingStyle}>and</span>
-          <span className="text-salmon font-semibold inline-flex items-baseline" style={headingStyle}>
+          <span className="text-purple-600 font-semibold inline-flex items-baseline" style={headingStyle}>
             scro<span>ll</span>
             {isInView && <BlinkingCursor />}
           </span>
