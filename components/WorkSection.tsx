@@ -227,12 +227,13 @@ export default function WorkSection() {
     // Outer scroll container — height gives scroll budget for each card step
     <div ref={containerRef} style={{ height: "300vh" }}>
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-[100dvh] bg-cream flex flex-col overflow-hidden">
+      <div className="sticky top-0 h-[100dvh] flex flex-col overflow-hidden" style={{ background: "#111" }}>
 
         {/* Title */}
         <div className="px-4 md:px-10 pt-10 md:pt-14 pb-5 md:pb-6 flex-shrink-0">
           <h2
-            className="text-muted font-bold whitespace-nowrap"
+            className="font-bold whitespace-nowrap"
+            style={{ color: "rgba(255, 188, 149, 0.7)" }}
             style={{
               fontSize: "clamp(26px, 5vw, 64px)",
               letterSpacing: "0.02em",
